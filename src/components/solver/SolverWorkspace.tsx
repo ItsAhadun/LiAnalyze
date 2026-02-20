@@ -47,6 +47,7 @@ export default function SolverWorkspace() {
 
     const history = useHistory(initialMatrix);
     const [highlightedRow, setHighlightedRow] = useState<number | null>(null);
+    const [showWireframes, setShowWireframes] = useState(false);
 
     const solver = useSolver({
         stepDelay: 1200,
@@ -131,7 +132,7 @@ export default function SolverWorkspace() {
     // ─── Solving Phase ─────────────────────────────────────────
 
     return (
-        <div className="h-[calc(100vh-3.5rem)] flex flex-col">
+        <div className="flex-1 flex flex-col min-h-0">
             {/* Main split view */}
             <div className="flex-1 flex min-h-0">
                 {/* Left panel: Matrix + Controls */}
@@ -218,11 +219,19 @@ export default function SolverWorkspace() {
                 </div>
 
                 {/* Right panel: 3D Canvas */}
-                <div className="flex-1 p-3">
+                <div className="flex-1 p-3 relative">
+                    <button
+                        onClick={() => setShowWireframes((prev) => !prev)}
+                        className="absolute top-6 right-6 z-10 bg-black/40 hover:bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-md text-xs font-mono text-white/90 hover:text-white transition-colors border border-white/10 shadow-lg flex items-center gap-2"
+                    >
+                        <div className={`w-2 h-2 rounded-full ${showWireframes ? 'bg-indigo-400' : 'bg-white/20'}`} />
+                        Wireframes
+                    </button>
                     <Scene
                         planes={history.present.planes}
                         intersectionPoint={intersectionPoint}
                         highlightedRow={highlightedRow}
+                        showWireframes={showWireframes}
                     />
                 </div>
             </div>

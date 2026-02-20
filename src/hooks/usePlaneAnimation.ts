@@ -31,7 +31,7 @@ export function usePlaneAnimation(
 ) {
     const { duration = 600 } = options;
 
-    const meshRef = useRef<THREE.Mesh>(null);
+    const groupRef = useRef<THREE.Group>(null);
     const progressRef = useRef(1); // 1 = animation complete
     const startTimeRef = useRef(0);
 
@@ -52,9 +52,9 @@ export function usePlaneAnimation(
         const newTargetEuler = new THREE.Euler(...newRot);
         const newTargetQuat = new THREE.Quaternion().setFromEuler(newTargetEuler);
 
-        if (meshRef.current) {
-            prevPosition.current.copy(meshRef.current.position);
-            prevQuaternion.current.copy(meshRef.current.quaternion);
+        if (groupRef.current) {
+            prevPosition.current.copy(groupRef.current.position);
+            prevQuaternion.current.copy(groupRef.current.quaternion);
         } else {
             prevPosition.current.copy(newTargetPos);
             prevQuaternion.current.copy(newTargetQuat);
@@ -70,7 +70,7 @@ export function usePlaneAnimation(
 
     // Animate each frame
     useFrame((_, delta) => {
-        if (!meshRef.current || progressRef.current >= 1) return;
+        if (!groupRef.current || progressRef.current >= 1) return;
 
         if (startTimeRef.current === 0) {
             startTimeRef.current = performance.now();
@@ -83,14 +83,14 @@ export function usePlaneAnimation(
         const eased = 1 - Math.pow(1 - t, 3);
 
         // Interpolate position
-        meshRef.current.position.lerpVectors(
+        groupRef.current.position.lerpVectors(
             prevPosition.current,
             targetPosition.current,
             eased,
         );
 
         // Interpolate rotation
-        meshRef.current.quaternion.slerpQuaternions(
+        groupRef.current.quaternion.slerpQuaternions(
             prevQuaternion.current,
             targetQuaternion.current,
             eased,
@@ -102,5 +102,5 @@ export function usePlaneAnimation(
         }
     });
 
-    return { meshRef, isAnimating };
+    return { groupRef, isAnimating };
 }

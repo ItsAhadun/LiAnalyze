@@ -18,6 +18,7 @@ interface Plane3DProps {
     plane: PlaneParams;
     index: number;
     isHighlighted?: boolean;
+    showWireframe?: boolean;
     opacity?: number;
     size?: number;
 }
@@ -26,10 +27,11 @@ export default function Plane3D({
     plane,
     index,
     isHighlighted = false,
+    showWireframe = false,
     opacity = 0.5,
     size = 8,
 }: Plane3DProps) {
-    const { meshRef, isAnimating } = usePlaneAnimation({
+    const { groupRef, isAnimating } = usePlaneAnimation({
         normal: plane.normal,
         constant: plane.constant,
     });
@@ -44,31 +46,33 @@ export default function Plane3D({
     if (normalLen < 1e-10) return null;
 
     return (
-        <group>
-            <mesh ref={meshRef}>
+        <group ref={groupRef}>
+            {/* Main translucent plane - simple material without realistic light interactions */}
+            <mesh>
                 <planeGeometry args={[size, size, 1, 1]} />
-                <meshStandardMaterial
+                <meshBasicMaterial
                     color={color}
                     transparent
                     opacity={effectiveOpacity}
                     side={THREE.DoubleSide}
-                    roughness={0.4}
-                    metalness={0.1}
-                />
-            </mesh>
-
-            {/* Wireframe overlay for better visibility */}
-            <mesh ref={meshRef} renderOrder={1}>
-                <planeGeometry args={[size, size, 1, 1]} />
-                <meshBasicMaterial
-                    color={color}
-                    wireframe
-                    transparent
-                    opacity={0.4}
-                    side={THREE.DoubleSide}
                     depthWrite={false}
                 />
             </mesh>
+
+            {/* Wireframe overlay */}
+            {showWireframe && (
+                <mesh renderOrder={1}>
+                    <planeGeometry args={[size, size, 1, 1]} />
+                    <meshBasicMaterial
+                        color={color}
+                        wireframe
+                        transparent
+                        opacity={0.4}
+                        side={THREE.DoubleSide}
+                        depthWrite={false}
+                    />
+                </mesh>
+            )}
         </group>
     );
 }

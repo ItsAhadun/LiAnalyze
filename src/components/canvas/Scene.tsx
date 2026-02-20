@@ -21,9 +21,10 @@ interface SceneProps {
     planes: PlaneParams[];
     intersectionPoint?: [number, number, number] | null;
     highlightedRow?: number | null;
+    showWireframes?: boolean;
 }
 
-function SceneContent({ planes, intersectionPoint, highlightedRow }: SceneProps) {
+function SceneContent({ planes, intersectionPoint, highlightedRow, showWireframes = false }: SceneProps) {
     return (
         <>
             {/* Lighting */}
@@ -57,6 +58,7 @@ function SceneContent({ planes, intersectionPoint, highlightedRow }: SceneProps)
                     plane={plane}
                     index={i}
                     isHighlighted={highlightedRow === i}
+                    showWireframe={showWireframes}
                 />
             ))}
 
@@ -85,7 +87,7 @@ function SceneContent({ planes, intersectionPoint, highlightedRow }: SceneProps)
     );
 }
 
-export default function Scene({ planes, intersectionPoint, highlightedRow }: SceneProps) {
+export default function Scene({ planes, intersectionPoint, highlightedRow, showWireframes = false }: SceneProps) {
     const { resolvedTheme } = useTheme();
     const bgColor = resolvedTheme === 'dark' ? '#0a0a1a' : '#f0f0f5';
 
@@ -105,6 +107,7 @@ export default function Scene({ planes, intersectionPoint, highlightedRow }: Sce
                     planes={planes}
                     intersectionPoint={intersectionPoint}
                     highlightedRow={highlightedRow}
+                    showWireframes={showWireframes}
                 />
             </Canvas>
 
