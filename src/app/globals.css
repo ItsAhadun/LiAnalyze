@@ -118,5 +118,40 @@
   }
   body {
     @apply bg-background text-foreground;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+  }
+}
+
+/* Mobile touch & scroll optimizations */
+@layer utilities {
+  .touch-none {
+    touch-action: none;
+  }
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(1 0 0 / 15%) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: oklch(1 0 0 / 15%);
+    border-radius: 9999px;
+  }
+}
+
+/* Mobile-friendly range input */
+@media (pointer: coarse) {
+  input[type="range"]::-webkit-slider-thumb {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  select, button {
+    min-height: 36px;
   }
 }

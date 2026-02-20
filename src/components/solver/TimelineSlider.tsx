@@ -8,6 +8,7 @@
  * - Timeline scrubber
  * - Auto-solve trigger
  * - Speed control
+ * - Mobile-responsive: controls wrap, larger touch targets
  */
 
 import {
@@ -52,7 +53,7 @@ export default function TimelineSlider({
         <div className="space-y-2">
             {/* Scrubber */}
             <div className="flex items-center gap-3">
-                <span className="text-xs font-mono text-foreground/40 min-w-[4rem]">
+                <span className="text-xs font-mono text-foreground/40 min-w-[3.5rem] sm:min-w-[4rem]">
                     {currentStep + 1} / {totalSteps}
                 </span>
                 <input
@@ -61,10 +62,10 @@ export default function TimelineSlider({
                     max={totalSteps - 1}
                     value={currentStep}
                     onChange={(e) => onJumpTo(Number(e.target.value))}
-                    className="flex-1 h-1.5 bg-white/10 rounded-full appearance-none cursor-pointer
+                    className="flex-1 h-2 bg-white/10 rounded-full appearance-none cursor-pointer
             [&::-webkit-slider-thumb]:appearance-none
-            [&::-webkit-slider-thumb]:h-3.5
-            [&::-webkit-slider-thumb]:w-3.5
+            [&::-webkit-slider-thumb]:h-4
+            [&::-webkit-slider-thumb]:w-4
             [&::-webkit-slider-thumb]:rounded-full
             [&::-webkit-slider-thumb]:bg-indigo-500
             [&::-webkit-slider-thumb]:shadow-lg
@@ -73,7 +74,7 @@ export default function TimelineSlider({
             </div>
 
             {/* Controls */}
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
                 {/* Undo */}
                 <button
                     onClick={onUndo}
@@ -94,13 +95,13 @@ export default function TimelineSlider({
                     <Redo2 size={16} />
                 </button>
 
-                <div className="w-px h-5 bg-white/10 mx-1" />
+                <div className="w-px h-5 bg-white/10 mx-1 hidden sm:block" />
 
                 {/* Auto-solve / Pause */}
                 {isPlaying ? (
                     <button
                         onClick={onPause}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/20 text-amber-400 hover:bg-amber-500/30 text-xs font-semibold transition-colors"
+                        className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-amber-500/20 text-amber-400 hover:bg-amber-500/30 text-xs font-semibold transition-colors"
                     >
                         <Pause size={12} />
                         Pause
@@ -108,7 +109,7 @@ export default function TimelineSlider({
                 ) : (
                     <button
                         onClick={onAutoSolve}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-500/20 text-indigo-400 hover:bg-indigo-500/30 text-xs font-semibold transition-colors"
+                        className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-indigo-500/20 text-indigo-400 hover:bg-indigo-500/30 text-xs font-semibold transition-colors"
                     >
                         <Zap size={12} />
                         Auto-Solve
@@ -117,14 +118,14 @@ export default function TimelineSlider({
 
                 {/* Speed control */}
                 <div className="ml-auto flex items-center gap-1.5">
-                    <span className="text-xs text-foreground/40">Speed:</span>
+                    <span className="text-xs text-foreground/40 hidden sm:inline">Speed:</span>
                     {[0.5, 1, 2].map((s) => (
                         <button
                             key={s}
                             onClick={() => onSpeedChange(s)}
-                            className={`px-2 py-0.5 rounded text-xs font-mono transition-colors ${speed === s
-                                    ? 'bg-indigo-600 text-white'
-                                    : 'text-foreground/40 hover:text-foreground/60 hover:bg-white/5'
+                            className={`px-2 py-1 rounded text-xs font-mono transition-colors ${speed === s
+                                ? 'bg-indigo-600 text-white'
+                                : 'text-foreground/40 hover:text-foreground/60 hover:bg-white/5'
                                 }`}
                         >
                             {s}x

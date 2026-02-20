@@ -26,14 +26,14 @@ export default function AugmentedMatrix({
     const vars = numVars ?? matrix[0].length - 1;
 
     return (
-        <div className="relative inline-block">
+        <div className="relative inline-block max-w-full overflow-x-auto scrollbar-thin">
             {/* Matrix brackets */}
             <div className="flex items-stretch">
                 {/* Left bracket */}
                 <div className="w-1.5 border-l-2 border-t-2 border-b-2 border-foreground/30 rounded-l-sm" />
 
                 {/* Matrix content */}
-                <div className="px-2 py-1.5">
+                <div className="px-1.5 sm:px-2 py-1.5">
                     <table className="border-collapse">
                         <tbody>
                             {matrix.map((row, rowIdx) => {
@@ -44,23 +44,23 @@ export default function AugmentedMatrix({
                                     <tr
                                         key={rowIdx}
                                         className={`transition-all duration-300 ${isHighlighted
-                                                ? 'bg-amber-500/20 scale-[1.01]'
-                                                : ''
+                                            ? 'bg-amber-500/20 scale-[1.01]'
+                                            : ''
                                             }`}
                                     >
                                         {row.map((val, colIdx) => (
                                             <td
                                                 key={colIdx}
-                                                className={`px-2.5 py-1 text-center font-mono text-sm transition-colors ${colIdx === vars
-                                                        ? 'border-l-2 border-foreground/20 pl-3'
-                                                        : ''
+                                                className={`px-1.5 sm:px-2.5 py-1 text-center font-mono text-sm transition-colors ${colIdx === vars
+                                                    ? 'border-l-2 border-foreground/20 pl-2 sm:pl-3'
+                                                    : ''
                                                     }`}
                                                 style={{
                                                     color: colIdx < vars ? rowColor : undefined,
                                                 }}
                                             >
                                                 <span
-                                                    className={`inline-block min-w-[2rem] ${isHighlighted ? 'font-bold' : 'font-medium'
+                                                    className={`inline-block min-w-[1.5rem] sm:min-w-[2rem] ${isHighlighted ? 'font-bold' : 'font-medium'
                                                         }`}
                                                 >
                                                     {formatNumber(val)}

@@ -11,17 +11,17 @@ export default function HomePage() {
       <main className="relative overflow-hidden">
         {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-indigo-500/5 via-transparent to-transparent pointer-events-none" />
-        <div className="absolute top-32 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-32 left-1/2 -translate-x-1/2 w-[400px] sm:w-[600px] md:w-[800px] h-[400px] sm:h-[600px] md:h-[800px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none" />
 
-        <div className="max-w-4xl mx-auto px-4 pt-24 pb-16 text-center relative z-10">
+        <div className="max-w-4xl mx-auto px-4 pt-16 sm:pt-20 md:pt-24 pb-12 md:pb-16 text-center relative z-10">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold mb-6 md:mb-8">
             <Layers size={12} />
             Interactive Linear Algebra
           </div>
 
           {/* Headline */}
-          <h1 className="text-5xl md:text-6xl font-black text-foreground leading-tight tracking-tight mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight tracking-tight mb-4 md:mb-6">
             See the Math.{' '}
             <span className="bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400 bg-clip-text text-transparent">
               Feel the Geometry.
@@ -29,7 +29,7 @@ export default function HomePage() {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg text-foreground/50 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-base md:text-lg text-foreground/50 max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed">
             Linalyze transforms abstract matrix operations into{' '}
             <span className="text-foreground/70 font-medium">
               explorable 3D visualizations
@@ -39,10 +39,10 @@ export default function HomePage() {
           </p>
 
           {/* CTA buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-14 md:mb-20">
             <Link
               href="/solver"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold text-sm shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all duration-200 group"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold text-sm shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all duration-200 group w-full sm:w-auto justify-center"
             >
               <Play size={16} />
               Start Solving
@@ -53,7 +53,7 @@ export default function HomePage() {
             </Link>
             <a
               href="#features"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 text-foreground/70 hover:text-foreground font-semibold text-sm border border-white/10 transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 text-foreground/70 hover:text-foreground font-semibold text-sm border border-white/10 transition-colors w-full sm:w-auto justify-center"
             >
               <BookOpen size={16} />
               Learn More
@@ -61,7 +61,7 @@ export default function HomePage() {
           </div>
 
           {/* Feature Cards */}
-          <div id="features" className="grid md:grid-cols-3 gap-4 text-left">
+          <div id="features" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
             {[
               {
                 title: '3D Visualization',

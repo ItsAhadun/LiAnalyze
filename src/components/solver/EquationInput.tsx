@@ -5,6 +5,7 @@
  *
  * Supports 2D (2 vars) and 3D (3 vars) with up to 6 equations.
  * Real-time coefficient validation with inline error display.
+ * Mobile-responsive: inputs wrap on narrow screens.
  */
 
 import { useState, useCallback } from 'react';
@@ -91,7 +92,7 @@ export default function EquationInput({ onSubmit }: EquationInputProps) {
     return (
         <div className="space-y-4">
             {/* Dimension selector */}
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
                 <span className="text-sm font-medium text-foreground/70">Dimensions:</span>
                 <div className="flex rounded-lg overflow-hidden border border-white/10">
                     {[2, 3].map((d) => (
@@ -99,8 +100,8 @@ export default function EquationInput({ onSubmit }: EquationInputProps) {
                             key={d}
                             onClick={() => switchDimension(d)}
                             className={`px-4 py-1.5 text-sm font-semibold transition-colors ${numVars === d
-                                    ? 'bg-indigo-600 text-white'
-                                    : 'bg-white/5 text-foreground/60 hover:bg-white/10'
+                                ? 'bg-indigo-600 text-white'
+                                : 'bg-white/5 text-foreground/60 hover:bg-white/10'
                                 }`}
                         >
                             {d}D
@@ -119,8 +120,8 @@ export default function EquationInput({ onSubmit }: EquationInputProps) {
             {/* Equation matrix input */}
             <div className="space-y-2">
                 {rows.map((row, rowIdx) => (
-                    <div key={rowIdx} className="flex items-center gap-1.5 group">
-                        <span className="text-xs text-foreground/40 w-5 font-mono">
+                    <div key={rowIdx} className="flex flex-wrap items-center gap-1.5 group">
+                        <span className="text-xs text-foreground/40 w-5 font-mono shrink-0">
                             {rowIdx + 1}.
                         </span>
                         {row.slice(0, numVars).map((val, colIdx) => (
@@ -132,7 +133,7 @@ export default function EquationInput({ onSubmit }: EquationInputProps) {
                                     type="number"
                                     value={val || ''}
                                     onChange={(e) => updateCell(rowIdx, colIdx, e.target.value)}
-                                    className="w-14 h-9 rounded-md bg-white/5 border border-white/10 text-center text-sm font-mono text-foreground focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-colors [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                    className="w-12 sm:w-14 h-9 rounded-md bg-white/5 border border-white/10 text-center text-sm font-mono text-foreground focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-colors [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                     placeholder="0"
                                 />
                                 <span className="text-sm font-medium text-foreground/60 italic">
@@ -145,7 +146,7 @@ export default function EquationInput({ onSubmit }: EquationInputProps) {
                             type="number"
                             value={row[numVars] || ''}
                             onChange={(e) => updateCell(rowIdx, numVars, e.target.value)}
-                            className="w-16 h-9 rounded-md bg-white/5 border border-white/10 text-center text-sm font-mono text-foreground focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-colors [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                            className="w-14 sm:w-16 h-9 rounded-md bg-white/5 border border-white/10 text-center text-sm font-mono text-foreground focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-colors [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                             placeholder="0"
                         />
                     </div>

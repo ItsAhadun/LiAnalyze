@@ -102,12 +102,12 @@ export default function RowOpToolbar({
                     <button
                         key={key}
                         onClick={() => setActiveOp(key)}
-                        className={`flex-1 flex items-center justify-center gap-1.5 px-2 py-1.5 rounded-md text-xs font-semibold transition-colors ${activeOp === key
+                        className={`flex-1 flex items-center justify-center gap-1.5 px-2 py-2 rounded-md text-xs font-semibold transition-colors ${activeOp === key
                             ? 'bg-indigo-600 text-white shadow-sm'
                             : 'text-foreground/50 hover:text-foreground/80 hover:bg-white/5'
                             }`}
                     >
-                        <Icon size={12} />
+                        <Icon size={14} />
                         {label}
                     </button>
                 ))}
@@ -181,7 +181,7 @@ export default function RowOpToolbar({
                         <select
                             value={row1}
                             onChange={(e) => setRow1(Number(e.target.value))}
-                            className="bg-white/5 border border-white/10 rounded-md px-2 py-1 text-xs font-mono text-foreground"
+                            className="bg-white/5 border border-white/10 rounded-md px-2 py-1.5 text-xs font-mono text-foreground"
                         >
                             {rowOptions.map((i) => (
                                 <option key={i} value={i} className="bg-zinc-900 text-white">
@@ -194,7 +194,7 @@ export default function RowOpToolbar({
                             type="text"
                             value={scalar}
                             onChange={(e) => setScalar(e.target.value)}
-                            className="w-16 bg-white/5 border border-white/10 rounded-md px-2 py-1 text-xs font-mono text-foreground text-center"
+                            className="w-14 sm:w-16 bg-white/5 border border-white/10 rounded-md px-2 py-1.5 text-xs font-mono text-foreground text-center"
                             placeholder="k"
                         />
                         <span className="text-foreground/40">×</span>
@@ -202,7 +202,7 @@ export default function RowOpToolbar({
                         <select
                             value={row2}
                             onChange={(e) => setRow2(Number(e.target.value))}
-                            className="bg-white/5 border border-white/10 rounded-md px-2 py-1 text-xs font-mono text-foreground"
+                            className="bg-white/5 border border-white/10 rounded-md px-2 py-1.5 text-xs font-mono text-foreground"
                         >
                             {rowOptions.map((i) => (
                                 <option key={i} value={i} className="bg-zinc-900 text-white">
@@ -218,7 +218,7 @@ export default function RowOpToolbar({
             <button
                 onClick={handleApply}
                 disabled={disabled || !isValid}
-                className="w-full py-2 px-4 rounded-lg bg-indigo-600/80 hover:bg-indigo-500 disabled:bg-gray-600/30 disabled:cursor-not-allowed text-white text-sm font-semibold transition-colors"
+                className="w-full py-2.5 px-4 rounded-lg bg-indigo-600/80 hover:bg-indigo-500 disabled:bg-gray-600/30 disabled:cursor-not-allowed text-white text-sm font-semibold transition-colors"
             >
                 Apply Operation
             </button>

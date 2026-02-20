@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function SolverPage() {
     return (
-        <div className="h-screen flex flex-col bg-background overflow-hidden w-full">
+        <div className="h-dvh flex flex-col bg-background overflow-x-hidden w-full">
             <Navbar />
             <SolverWorkspace />
         </div>

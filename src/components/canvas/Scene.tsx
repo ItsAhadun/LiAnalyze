@@ -77,7 +77,7 @@ function SceneContent({ planes, intersectionPoint, highlightedRow, showWireframe
             />
 
             {/* Gizmo helper for orientation */}
-            <GizmoHelper alignment="bottom-right" margin={[60, 60]}>
+            <GizmoHelper alignment="bottom-right" margin={[40, 40]}>
                 <GizmoViewport
                     axisColors={['#ef4444', '#22c55e', '#3b82f6']}
                     labelColor="white"
@@ -92,7 +92,7 @@ export default function Scene({ planes, intersectionPoint, highlightedRow, showW
     const bgColor = resolvedTheme === 'dark' ? '#0a0a1a' : '#f0f0f5';
 
     return (
-        <div className="h-full w-full relative rounded-xl overflow-hidden border border-white/10">
+        <div className="h-full w-full relative rounded-xl overflow-hidden border border-white/10 touch-none">
             <Canvas
                 camera={{
                     position: [8, 6, 8],
@@ -112,8 +112,8 @@ export default function Scene({ planes, intersectionPoint, highlightedRow, showW
             </Canvas>
 
             {/* Canvas overlay info */}
-            <div className="absolute bottom-3 left-3 text-xs text-white/40 font-mono pointer-events-none">
-                Orbit: drag · Zoom: scroll · Pan: right-drag
+            <div className="absolute bottom-2 left-2 md:bottom-3 md:left-3 text-[10px] md:text-xs text-white/40 font-mono pointer-events-none">
+                Orbit: drag · Zoom: pinch · Pan: two-finger
             </div>
         </div>
     );
